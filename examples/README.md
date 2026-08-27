@@ -3,23 +3,60 @@
 | File | Description |
 |------|-------------|
 | [basic_rag.py](basic_rag.py) | End-to-end pipeline using only built-in components (no API key needed) |
+| [basic_rag.ipynb](basic_rag.ipynb) | Interactive Jupyter notebook covering the complete RAG pipeline |
 
 ## Running the examples
 
+### Python script
+
+From the repository root:
+
 ```bash
-# from the repo root
 pip install -e ".[dev]"
 python examples/basic_rag.py
 ```
+
+### Jupyter notebook
+
+Install Jupyter dependencies:
+
+```bash
+pip install jupyter ipykernel
+```
+
+Start Jupyter:
+
+```bash
+jupyter notebook
+```
+
+Then open:
+
+```text
+examples/basic_rag.ipynb
+```
+
+Select the Python environment for the RAG Framework and run the notebook
+cells from top to bottom.
+
+The notebook demonstrates:
+
+1. Loading a document.
+2. Splitting the document into chunks.
+3. Generating embeddings.
+4. Adding chunks to the retriever.
+5. Querying the RAG pipeline.
+6. Inspecting retrieved source chunks.
 
 ## Adding real LLM / embedder support
 
 The built-in `RandomEmbedder` and `EchoGenerator` are placeholders.
 Swap them for real implementations once the community contributes them
-(see [Good First Issues](../.github/GOOD_FIRST_ISSUES.md)):
+(see [Good First Issues](../.github/GOOD_FIRST_ISSUES.md)).
+
+For example, future integrations may look like:
 
 ```python
-# future usage (once contributed)
 from ragframework.embeddings.openai import OpenAIEmbedder
 from ragframework.generator.openai import OpenAIGenerator
 
@@ -29,3 +66,5 @@ pipeline = RAGPipeline(
     generator=OpenAIGenerator(model="gpt-4o-mini"),
 )
 ```
+
+These integrations are not included in the current built-in framework.
