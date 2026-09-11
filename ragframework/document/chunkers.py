@@ -169,6 +169,8 @@ class RecursiveChunker(TextChunker):
             while idx < len(text):
                 end = min(idx + self.chunk_size, len(text))
                 result.append(text[idx:end])
+                if end == len(text):
+                    break
                 idx += step
                 if step <= 0:
                     break

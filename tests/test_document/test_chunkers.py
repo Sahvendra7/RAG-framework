@@ -169,3 +169,15 @@ class TestRecursiveChunker:
         doc2 = Document(id="x", content="a b c", metadata={})
         chunks = chunker.chunk(doc2)
         assert [c.content for c in chunks] == ["a b ", "c"]
+
+    def test_redundant_trailing_chunks(self):
+        from ragframework.document.chunkers import RecursiveChunker
+
+        doc = Document(id="x", content="x" * 10, metadata={})
+        chunker = RecursiveChunker(
+            separators=[],
+            chunk_size=6,
+            chunk_overlap=4,
+        )
+        chunks = chunker.chunk(doc)
+        assert [len(c.content) for c in chunks] == [6, 6, 6]
